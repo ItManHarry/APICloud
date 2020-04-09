@@ -49,7 +49,55 @@ Window会装载一个HTML页面也就是应用打开的第一个页面，这个H
 
 - APICloud五大组件
 
+	1. Widget
+	
+	2. Layout
+	
+	3. Window
+
+	4. Frame
+	
+	5. UIModule
+	
+	首先是Widget，Widget当中可以包含Layout、Window和UIModule；在Window中，可以包含Layout、Frame和UIModule；Layout中可以包含Window和Frame；
+	Frame中只能包含UIModule
+	
 - api对象和前端框架
 
+	开启状态栏沉浸模式
+	
+	1. config.xml配置
+	
+```xml
+	<preference name="statusBarAppearance" value="true"/>
+```
+	2. 页面元素使用$api.fixStatusBar().
+	
+```javascript
+	//设置页面顶部元素沉浸
+	$api.fixStatusBar( $api.byId('header') );
+	//设置状态栏样式
+    api.setStatusBarStyle({
+		style: 'dark',
+		color: '#fff'
+	});
+```
 
+	优化点击事件和tapmode
+	
+	在点击发生的元素上添加tapmode属性
 
+```html
+	<div tapmode onclick = "goBack()">Back</div>
+```
+	如果动态创建了包含tapmode的元素，之后需要调用以下代码使之生效
+	
+```
+	api.parseTapmode()
+```
+
+	tapmode支持赋值CSS样式及动态改变元素样式，实现Native的点击效果
+	
+```html
+	<div tapmode = "btn-press" class = "btn" onclick = "goBack()">Back</div>
+```
