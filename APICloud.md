@@ -27,6 +27,26 @@
 
 - APICloud App启动过程，了解config.xml配置文件
 
+	APICloud引擎初始化时会创建两个UI组件实例，分别是Widget和Window。Widget是APICloud App运行时的最小单位，就是说APICloud App想要运行必须
+至少有一个Widget。一般来说一个App有一个Widget就足够了，此时可以把Widget当做App本身。之后Widget会创建一个根Window对象（Root Window），这个
+Window会装载一个HTML页面也就是应用打开的第一个页面，这个HTML页面可以通过config.xml配置打开&lt;content src = "index.html"/&gt;这一行。
+
+	config.xml配置文件：配置App相关重要的配置信息。
+
+	APICloud引擎初始化完成后会发出两个重要的事件：
+	
+	1. content事件：读取config.xml配置，打开App默认页面
+	
+	2. apiready事件：这个事件是api对象准备完成后产生的
+	
+```javascript
+	<script type = "text/javascript">
+		apiready = function(){
+			//TO DO
+		}
+	</script>
+```
+
 - APICloud五大组件
 
 - api对象和前端框架
