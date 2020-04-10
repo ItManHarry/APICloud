@@ -101,3 +101,86 @@ Window会装载一个HTML页面也就是应用打开的第一个页面，这个H
 ```html
 	<div tapmode = "btn-press" class = "btn" onclick = "goBack()">Back</div>
 ```
+
+## Chapter 3 - APICloud和服务器通讯
+
+```javascript
+	api.ajax({
+		url: 'http://10.40.120.136:3000/doc/biz/catalog/tree',
+		method: 'get',
+		data: {
+			values: {
+
+			},
+			files: {
+
+			}
+		}
+	},function(ret, err){
+	  if(ret){
+		console.log("Status is : "+ret.status)
+		console.log("Message is : "+ret.message)
+		console.log($api.jsonToStr(ret))
+	  }
+
+	});
+```
+
+## Chapter 4 - 加载更新服务端数据，实现本地的数据存储
+
+- doT模板引擎
+
+```html
+	<!DOCTYPE html>
+	  <html>
+	  <head>
+		  <meta charset="utf-8">
+		  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		  <title>title</title>
+		  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		  <style>
+
+		  </style>
+	  </head>
+	  <body>
+		<script type="text/template" id = "dotTemplate">
+		  {{~ it:user:index}}
+			{{? user.deleted !== true}}
+			  <div>{{= index + 1}}</div>
+			  <div>{{= user.name}}</div>
+			  <hr>
+			{{?}}
+		  {{~}}
+		</script>
+	  </body>
+	  <script type="text/javascript" src="../script/api.js"></script>
+	  <script type="text/javascript" src="../script/doT.min.js"></script>
+	  <script type="text/javascript">
+		var users = [
+		  {name:"Sam"},
+		  {name:"Jack",deleted:true},
+		  {name:"Harry"},
+		  {name:"Tom"}
+		]
+		var ts = document.getElementById("dotTemplate").innerHTML;
+		var ft = doT.template(ts);
+		ts = ft(users)
+		document.body.innerHTML = ts
+		  apiready = function(){
+
+		  };
+	  </script>
+	  </html>
+```
+
+- 本地存储和图片缓存
+
+- 下拉刷新、上拉加载
+
+- 理解APICloud应用沙箱机制
+
+- APICloud资源访问协议使用
+
+- 常用对话窗口
+
+- APICloud平台的事件机制
